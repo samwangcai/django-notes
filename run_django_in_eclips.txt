@@ -1,0 +1,28 @@
+Run Django in Eclips
+    1. install all
+    2. install pydev
+        a. eclips -> help -> install new software
+        b. add pydev path: pydev - http://pydev.org/updates
+        c. select pydev and next until finished
+    3. config envi path
+        a. eclips -> window -> Preference -> pyDev -> Interpreters -> Python Interpreters
+        b. Quick Auto-Config python path
+        c. String Substitution Variables -> Add variable
+            i.   add DJANGO_MANAGE_LOCATION : project_path/manage.py    eg: mysite/manage.py
+            ii.  add DJANGO_SETTINGS_MODULE : project_path.settings     eg: mysite.settings
+        d. RunIcon -> Run Configurations -> PyDev Django
+            i.   Main -- Main Module: ${workspace_loc:django}/${DJANGO_MANAGE_LOCATION}
+            ii.  Arguments -- Program arguments: runserver --noreload
+            iii. Common -- Encoding: UTF-8
+        e. autoreload
+            i.   add code into manage.py before if __name__ == "__main__"
+--------------------------------------------------------------------------------------
+import pydevd
+pydevd.patch_django_autoreload(
+    patch_remote_debugger=True,
+    patch_show_console=True
+)
+--------------------------------------------------------------------------------------
+            ii.  Window -> Preferences -> Liberaries add pydev src folder    
+                    eg: D:\Program Files\eclipse\plugins\prg.python.pydev_3.1.0.201312121632\pysrc
+            
